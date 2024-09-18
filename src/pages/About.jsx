@@ -1,10 +1,6 @@
-import PageNav from "../components/PageNav";
-
 function About() {
   return (
     <>
-      {" "}
-      <PageNav />
       <div className="w-[1170px]  mx-auto my-20">
         <div className="w-[750px] mx-auto mb-10 ">
           <p className="text-[30px] font-bold mb-5 flex ">

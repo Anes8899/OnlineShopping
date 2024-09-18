@@ -10,7 +10,7 @@ const navigatePage = [
 
 function PageNav() {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [mouseOver, setMouseOver] = useState(false);
   const [click, setClick] = useState("");
 
@@ -24,7 +24,9 @@ function PageNav() {
   return (
     <nav className="border  w-[1530px] xl:w-full h-28 justify-between flex p-7 bg-white">
       <div className="text-[30px] font-sans font-bold">
-        <span className="text-red-500">Time</span> Zone
+        <Link to={"/"}>
+          <span className="text-red-500">Time</span> Zone
+        </Link>
       </div>
 
       <ul className="flex gap-2 text-center mt-3  w-auto ">
@@ -61,18 +63,7 @@ function PageNav() {
           </Link>
         </li>
 
-        <li>
-          <Link
-            to={"/detail"}
-            className={`hover:border hover:bg-red-400 px-5 py-3 rounded-md hover:text-white  ${
-              click === "/detail" ? "bg-red-500 text-white" : "text-black"
-            }`}
-          >
-            ProductDetail
-          </Link>
-        </li>
-
-        <li className="relative group">
+        {/* <li className="relative group">
           <button
             className="relative bottom-2 hover:bg-red-400 hover:text-white rounded-md px-5  w-30 h-11 group-hover:opacity-100"
             onClick={() => {
@@ -88,7 +79,7 @@ function PageNav() {
             </span>
           </button>
           {/* className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-400 rounded-md left-[-40px] mt-5 w-48 z-10" */}
-          {mouseOver && (
+        {/* {mouseOver && (
             <ul className="absolute transition-opacity duration-300 bg-slate-400 rounded-md left-[-40px] mt-5 w-48 z-10">
               {navigatePage.map((item) => (
                 <li key={item.key} className="py-5 px-3">
@@ -105,8 +96,8 @@ function PageNav() {
                 </li>
               ))}
             </ul>
-          )}
-        </li>
+          )} */}
+        {/* </li> */}
 
         <li>
           <Link

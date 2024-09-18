@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ProductCard() {
+function ProductCard({ title }) {
   const [hover, setHover] = useState(false);
   return (
     <div className="w-[390px] h-[519px]">
@@ -19,7 +19,7 @@ function ProductCard() {
         <div className={"border border-red-500 top-[-49px] relative"}></div>
       </div>
       <div className="text-center mt-5">
-        <a className="text-[25px] font-bold">Thermo Ball Etip Gloves</a>
+        <a className="text-[25px] font-bold">{title}</a>
         <p className="font-bold mt-3 text-red-600">$45,743</p>
       </div>
     </div>

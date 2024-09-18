@@ -1,12 +1,19 @@
+import { useLoaderData } from "react-router-dom";
 import DetailAboutPage from "../components/DetailAboutPage";
 import Footer from "../components/Footer";
-import PageNav from "../components/PageNav";
-import ProductCard from "../components/ProductCard";
+import { getProducts } from "../services/apiItem";
+import ProductList from "../components/Products/ProductList";
+
+export async function loader() {
+  const product = await getProducts();
+  return product;
+}
 
 function Shop() {
+  const product = useLoaderData();
+  console.log(product);
   return (
-    <>
-      <PageNav />
+    <div>
       <div className="  w-[1170px] mx-auto mt-20">
         <div className="flex gap-10 justify-between ">
           <ul className="flex gap-10 cursor-pointer">
@@ -26,15 +33,15 @@ function Shop() {
             <option value={"page3"}>page3</option>
           </select>
         </div>
-        <div className="grid grid-cols-3 mt-6 mb-20">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        <div className="grid grid-cols-3 m-20 gap-5">
+          {product.map((products) => (
+            <ProductList products={products} key={products.id} />
+          ))}
         </div>
         <DetailAboutPage />
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
 

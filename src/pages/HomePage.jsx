@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
-import CardNewArrivals from "../components/CardNewArrivals";
-import ProductCard from "../components/ProductCard";
+// import { Link } from "react-router-dom";
+// import CardNewArrivals from "../components/cart/CardNewArrivals";
+// // import ProductCard from "../components/cart/ProductCard";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
-import DetailAboutPage from "../components/DetailAboutPage";
-import PageNav from "../components/PageNav";
+// import DetailAboutPage from "../components/DetailAboutPage";
+// import PageNav from "../components/PageNav";
 import { useState } from "react";
+// import ListProductCard from "../components/cart/ListProductCard";
 
 function HomePage() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -21,9 +22,7 @@ function HomePage() {
   return (
     <div onScroll={handleScroll} className="overflow-y-scroll h-screen">
       {scrollPosition < 15 && scrollPosition > 0 ? null : (
-        <div className="fixed top-0 w-full z-50 bg-white ">
-          <PageNav />
-        </div>
+        <div className="fixed top-0 w-full z-50 bg-white "></div>
       )}
 
       <div>
@@ -37,13 +36,12 @@ function HomePage() {
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat is aute irure.
               </p>
-              {/* <div className="group relative"> */}
-              <Link to={"/shop"} className="relative ">
-                <Button size="w-[150px]" bg="bg-red-500" effic="bg-gray-500">
-                  SHOP NOW
-                </Button>
-              </Link>
-              {/* </div> */}
+
+              {/* <Link to={"/shop"} className="relative "> */}
+              <Button size="w-[150px]" bg="bg-red-500" effic="bg-gray-500">
+                SHOP NOW
+              </Button>
+              {/* </Link> */}
             </div>
             <div className="p-6 overflow-hidden">
               <img
@@ -56,9 +54,9 @@ function HomePage() {
         <section className="xl:w-[1170px]  h-auto mx-auto mt-48 max-lg:mx-20 max-sm:mx-10 ">
           <p className="font-bold text-[40px] pb-16   ">New Arrivals</p>
           <div className="grid xl:grid-cols-3 md:grid-cols-2 md:w-full max-lg:grid-cols-2 max-sm:grid-cols-1">
+            {/* <CardNewArrivals />
             <CardNewArrivals />
-            <CardNewArrivals />
-            <CardNewArrivals />
+            <CardNewArrivals /> */}
           </div>
         </section>
         <section className="grid xl:grid-cols-4 md:grid-cols-2 md:w-full max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2  max-sm:w-full">
@@ -99,12 +97,7 @@ function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-3">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {/* <ListProductCard /> */}
           </div>
         </section>
         <div className="flex justify-center items-center group relative">
@@ -146,9 +139,10 @@ function HomePage() {
             </div>
           </div>
         </section>
-        <DetailAboutPage />
+        {/* <DetailAboutPage /> */}
         <Footer />
       </div>
+      <h1>HomePage</h1>
     </div>
   );
 }
