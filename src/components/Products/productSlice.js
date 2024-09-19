@@ -12,14 +12,15 @@ import { singleProductLoader } from "../../services/apiItem";
 // console.log(res);
 
 const initialState = {
-  cart: [
-    {
-      productId: 0,
-      quantity: 1, // Initialize quantity to 1
-      unitPrice: 25, // This will be updated once the product is loaded
-      totalPrice: 25,
-    },
-  ],
+  product: [],
+  // product: [
+  //   {
+  //     productId: 0,
+  //     quantity: 1, // Initialize quantity to 1
+  //     unitPrice: 25, // This will be updated once the product is loaded
+  //     totalPrice: 25,
+  //   },
+  // ],
 };
 
 const useProductSlice = createSlice({
@@ -33,6 +34,9 @@ const useProductSlice = createSlice({
     decrement: (state) => {
       state.quantity += 1;
       state.totalPrice = state.quantity - state.unitPrice;
+    },
+    addProduct: (state, action) => {
+      state.product.push(action.payload);
     },
     // extraReducers: (builder) => {
     //   builder
@@ -51,6 +55,6 @@ const useProductSlice = createSlice({
   },
 });
 
-export const { increment, decrement } = useProductSlice.actions;
+export const { increment, decrement, addProduct } = useProductSlice.actions;
 
 export default useProductSlice.reducer;

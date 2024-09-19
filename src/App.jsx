@@ -4,6 +4,7 @@ import AppLayout from "./pages/AppLayout";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
+import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import Shop, { loader as productLoader } from "./pages/Shop";
 import ProductDetail, {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
+      { path: "cart", element: <Cart /> },
     ],
   },
 ]);

@@ -110,10 +110,16 @@ function PageNav() {
           </Link>
         </li>
       </ul>
-      <div className="flex gap-10">
-        <img src="./search.svg" className="w-5" />
-        <img src="./portrait.svg" className="w-5" />
-        <img src="./shopping-cart.svg" className="w-5" />
+      <div className="flex gap-10 align-middle">
+        <Link>
+          <img src="./search.svg" className="w-5" />
+        </Link>
+        <Link>
+          <img src="./portrait.svg" className="w-5" />
+        </Link>
+        <Link to={"cart"}>
+          <img src="./shopping-cart.svg" className="w-5" />
+        </Link>
       </div>
     </nav>
   );
