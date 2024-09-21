@@ -1,60 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { singleProductLoader } from "../../services/apiItem";
-
-// export const fetchProduct = createAsyncThunk(
-//   "product/fetchProduct", // action type string
-//   async (productId) => {
-//     const data = await singleProductLoader(productId); // API call
-//     const res = await data.json();
-//     return { res }; // Assuming the response has a 'data' field
-//   }
-// );
-// console.log(res);
 
 const initialState = {
   product: [],
-  // product: [
-  //   {
-  //     productId: 0,
-  //     quantity: 1, // Initialize quantity to 1
-  //     unitPrice: 25, // This will be updated once the product is loaded
-  //     totalPrice: 25,
-  //   },
-  // ],
 };
 
 const useProductSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.quantity += 1;
-      state.totalPrice = state.quantity * state.unitPrice;
+    increment: (state, action) => {
+      const product = state.product.find(
+        (item) => item.productId === action.payload
+      );
+      product.quantity += 1;
+      product.totalPrice = product.quantity * product.unitPrice;
     },
-    decrement: (state) => {
-      state.quantity += 1;
-      state.totalPrice = state.quantity - state.unitPrice;
+    decrement: (state, action) => {
+      const product = state.product.find(
+        (item) => item.productId === action.payload
+      );
+
+      product.quantity -= 1;
+      product.totalPrice = product.quantity * product.unitPrice;
     },
     addProduct: (state, action) => {
+      const itemIndex = state.product.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (itemIndex >= 0) {
+        // If item is already in cart, increment the quantity
+        state.product[itemIndex].quantity += 1;
+      }
       state.product.push(action.payload);
     },
-    // extraReducers: (builder) => {
-    //   builder
-    //     .addCase(fetchProduct.pending, (state) => {
-    //       state.status = "loading";
-    //     })
-    //     .addCase(fetchProduct.fulfilled, (state, action) => {
-    //       state.status = "succeeded";
-    //       state.product = action.payload; // Store the product data
-    //     })
-    //     .addCase(fetchProduct.rejected, (state, action) => {
-    //       state.status = "failed";
-    //       state.error = action.error.message;
-    //     });
-    // },
+    deleteProduct: (state, action) => {
+      state.product = state.product.filter(
+        (item) => item.productId !== action.payload.productId
+      );
+    },
   },
 });
 
-export const { increment, decrement, addProduct } = useProductSlice.actions;
+export const { increment, decrement, addProduct, deleteProduct } =
+  useProductSlice.actions;
+
+export const getItem = (state) => state.product.product;
+
+export const getCurrentQuantityById = (id) => (state) =>
+  state.product.product.find((item) => item.productId === id)?.quantity ?? 0;
 
 export default useProductSlice.reducer;

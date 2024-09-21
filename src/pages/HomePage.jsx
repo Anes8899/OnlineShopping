@@ -38,7 +38,12 @@ function HomePage() {
               </p>
 
               {/* <Link to={"/shop"} className="relative "> */}
-              <Button size="w-[150px]" bg="bg-red-500" effic="bg-gray-500">
+              <Button
+                size="w-[150px]"
+                bg="bg-red-500"
+                effic="bg-gray-500"
+                className="py-5"
+              >
                 SHOP NOW
               </Button>
               {/* </Link> */}
@@ -101,7 +106,7 @@ function HomePage() {
           </div>
         </section>
         <div className="flex justify-center items-center group relative">
-          <Button>VIEW MORE PRODUCT</Button>
+          <Button className="py-5">VIEW MORE PRODUCT</Button>
         </div>
         <section>
           <div className="flex justify-center mt-[200px]">
@@ -113,7 +118,9 @@ function HomePage() {
                   laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                   irure dolor in reprehenderit in voluptate velit esse.
                 </p>
-                <Button size="w-[200px]">SHOP WATCH</Button>
+                <Button size="w-[200px]" className="py-5">
+                  SHOP WATCH
+                </Button>
               </div>
               <img
                 src="../src/assets/img/popular1.png.webp"
@@ -135,7 +142,9 @@ function HomePage() {
                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
                 in reprehenderit in voluptate velit esse.
               </p>
-              <Button size="w-[200px]">SHOP WATCH</Button>
+              <Button size="w-[200px]" className="py-5">
+                SHOP WATCH
+              </Button>
             </div>
           </div>
         </section>

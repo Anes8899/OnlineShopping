@@ -44,7 +44,9 @@ function ProductList({ products }) {
         <p className="font-bold mt-3 text-red-600">${price}</p>
       </div>
       <Link to={`${products.id}`} className="border flex flex-col">
-        <Button size="20">Preview </Button>
+        <Button size="20" className="py-3">
+          Preview{" "}
+        </Button>
       </Link>
     </div>
   );

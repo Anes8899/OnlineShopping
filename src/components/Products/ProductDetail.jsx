@@ -4,7 +4,13 @@ import Footer from "../Footer";
 import { singleProductLoader } from "../../services/apiItem";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, decrement, increment } from "./productSlice";
+import {
+  addProduct,
+  decrement,
+  getCurrentQuantityById,
+  increment,
+} from "./productSlice";
+import UpdateProduct from "./UpdateProduct";
 
 export async function loader({ params }) {
   const product = await singleProductLoader(params.productId);
@@ -13,22 +19,24 @@ export async function loader({ params }) {
 
 function ProductDetail() {
   const [currentImage, setCurrentImage] = useState(0);
+
   const product = useLoaderData();
-  const { id, title, image, price, description, unitPrice } = product;
-  // const cart = useSelector((state) => state.product.cart);
+  const { id, title, image, price, description } = product;
+
   const dispatch = useDispatch();
+  const quantity = useSelector(getCurrentQuantityById(id));
   const images = [image];
 
   function handAddItem() {
     const newItem = {
-      ProductId: id,
-      // named,
+      productId: id,
+      title,
+      image,
       quantity: 1,
-      unitPrice,
-      totalPrice: unitPrice * 1,
+      unitPrice: price,
+      totalPrice: price * 1,
     };
     dispatch(addProduct(newItem));
-    console.log(newItem);
   }
 
   function NextImage() {
@@ -78,37 +86,23 @@ function ProductDetail() {
           <p className="text-center w-full text-[15px]">{description}</p>
 
           <>
-            <div className="flex justify-center mt-10">
-              <div className="py-5">Quantity</div>
+            {quantity === 0 ? (
+              <button
+                className="w-40 border p-5 flex justify-center mx-auto mt-10 rounded-md border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={handAddItem}
+              >
+                Add to Card
+              </button>
+            ) : (
+              <div className="flex justify-around mt-10  w-[400px] flex-wrap align-middle mx-auto">
+                <div className="my-auto">Quantity</div>
 
-              <div className=" w-20 flex mx-10">
-                <div></div>
-                <button
-                  className="border px-10 py-5 text-[20px] cursor-pointer"
-                  onClick={() => dispatch(decrement())}
-                >
-                  -
-                </button>
-                <div className="border px-10 py-5 bg-slate-500 text-[20px]">
-                  {/* {product.quantity} */} X
-                </div>
-                <button
-                  className="border px-10 py-5 text-[20px] cursor-pointer"
-                  onClick={() => dispatch(increment())}
-                >
-                  +
-                </button>
+                <UpdateProduct productId={id} quantity={quantity} />
+
+                <div className="my-auto">{price}$</div>
               </div>
-              <div className="ml-48 py-5">{/* ${product.totalPrice} */} X</div>
-            </div>
+            )}
           </>
-
-          <button
-            className="w-40 border p-5 flex justify-center mx-auto mt-10 rounded-md border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-            onClick={handAddItem}
-          >
-            Add to Card
-          </button>
         </div>
       </div>
       <div className="ml-5">

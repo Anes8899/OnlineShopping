@@ -1,12 +1,60 @@
-import { useState } from "react";
-import PageNav from "../components/PageNav";
 import Footer from "../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decrement,
+  deleteProduct,
+  getItem,
+  increment,
+} from "../components/Products/productSlice";
+import UpdateProduct from "../components/Products/UpdateProduct";
 
 function Card() {
-  const [count, setCount] = useState(0);
+  const product = useSelector(getItem);
+  const dispatch = useDispatch();
+
   return (
     <div className="w-[1170px]  mx-auto my-10">
-      <table className="w-full  text-left">
+      <div className="flex list-none justify-around border border-blue-600">
+        <li className="">No</li>
+        <li className="">Product</li>
+        <li>Quantity</li>
+        <li className="w-[30%]">Name</li>
+        <li className="w-[10%]">Price</li>
+        <li className="">Total</li>
+        <li className=""></li>
+      </div>
+
+      <ul>
+        {product.map((product, index) => (
+          <li
+            key={product.productId || index}
+            className="flex list-none border items-center justify-around flex-nowrap"
+          >
+            <p>{index + 1}</p>
+
+            <img className="w-20 my-5" src={product.image} alt={product.name} />
+            <div className="flex justify-around items-center">
+              <UpdateProduct
+                productId={product.productId}
+                quantity={product.quantity}
+              />
+            </div>
+            <p className=" px-4  w-[30%] flex-wrap">{product.title}</p>
+            <p>${product.unitPrice}</p>
+            <p className="w-20">${product.totalPrice}</p>
+
+            <button
+              className="border p-2 bg-red-500 text-white hover:bg-red-600 rounded-md"
+              onClick={() =>
+                dispatch(deleteProduct({ productId: product.productId }))
+              }
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      {/* <table className="w-full  text-left">
         <thead>
           <tr>
             <th className="p-2">Product</th>
@@ -69,9 +117,9 @@ function Card() {
             <td></td>
             <td className="p-5 text-right">SubTotal</td>
             <td className="text-right">$2160.00</td>
-          </tr>
+          </tr> */}
 
-          <tr className="border-y text-right">
+      {/* <tr className="border-y text-right">
             <td></td>
             <td></td>
             <td className="  align-text-top pt-2">Shipping</td>
@@ -118,9 +166,9 @@ function Card() {
                 Update Deatial
               </button>
             </td>
-          </tr>
+          </tr> */}
 
-          <tr>
+      {/* <tr>
             <td></td>
             <td></td>
             <td className=" text-right">
@@ -135,7 +183,7 @@ function Card() {
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> */}
 
       <Footer />
     </div>
