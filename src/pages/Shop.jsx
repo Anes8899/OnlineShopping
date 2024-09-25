@@ -11,10 +11,10 @@ export async function loader() {
 
 function Shop() {
   const product = useLoaderData();
-  console.log(product);
+
   return (
     <div>
-      <div className="  w-[1170px] mx-auto mt-20">
+      <div className="  w-[1170px] mx-auto mt-40">
         <div className="flex gap-10 justify-between ">
           <ul className="flex gap-10 cursor-pointer">
             <li className="hover:underline decoration-2 decoration-indigo-500 underline-offset-8 ">
@@ -33,11 +33,13 @@ function Shop() {
             <option value={"page3"}>page3</option>
           </select>
         </div>
+
         <div className="grid grid-cols-3 m-20 gap-5">
           {product.map((products) => (
             <ProductList products={products} key={products.id} />
           ))}
         </div>
+
         <DetailAboutPage />
         <Footer />
       </div>

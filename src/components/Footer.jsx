@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="max-w-[1256px] h-[616px] w-full mx-auto  ">
+    <footer className="max-w-[1256px] h-[516px] w-full mx-auto">
       <div className=" w-[1170px] h-[300px] mx-auto  mt-[150px] justify-between flex px-10">
         <div className="w-[25%]">
           <p className="text-[20px] font-bold">Time Zone</p>

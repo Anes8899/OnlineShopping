@@ -1,15 +1,16 @@
-function CardNewArrivals() {
+function CardNewArrivals({ item }) {
+  const { image, price, title } = item;
   return (
-    <div className="w-[390px] h-[616px]">
-      <div className="w-[360px] h-[498px] rounded-lg  overflow-hidden ">
+    <div className="w-[390px] h-[616px] mb-10">
+      <div className="w-[360px] h-[460px] rounded-lg  overflow-hidden border">
         <img
-          src="https://preview.colorlib.com/theme/timezone/assets/img/gallery/new_product1.png.webp"
-          className="transition-transform duration-300 hover:scale-105 h-full w-full "
+          src={`${image}`}
+          className="transition-transform duration-300 hover:scale-105 h-full w-full p-3"
         />
       </div>
       <div className="text-center">
-        <p className="text-[25px] font-bold">Thermo Ball Etip Gloves</p>
-        <p className="text-red-600 text-[20px]">$ 45,743</p>
+        <p className="text-[25px] font-bold">{title}</p>
+        <p className="text-red-600 text-[20px]">$ {price}</p>
       </div>
     </div>
   );

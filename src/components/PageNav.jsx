@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { MdAccountCircle, MdSearch, MdShoppingCart } from "react-icons/md";
 
 const navigatePage = [
   { key: 0, path: "/login", label: "Login" },
@@ -10,7 +11,7 @@ const navigatePage = [
 
 function PageNav() {
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [mouseOver, setMouseOver] = useState(false);
   const [click, setClick] = useState("");
 
@@ -22,7 +23,7 @@ function PageNav() {
   }, [location]);
 
   return (
-    <nav className="border  w-[1530px] xl:w-full h-28 justify-between flex p-7 bg-white">
+    <nav className="fixed border w-[1530px] xl:w-full h-28 justify-between flex p-7 bg-white top-0 left-0 z-50 border-b border-gray-300">
       <div className="text-[30px] font-sans font-bold">
         <Link to={"/"}>
           <span className="text-red-500">Time</span> Zone
@@ -30,7 +31,7 @@ function PageNav() {
       </div>
 
       <ul className="flex gap-2 text-center mt-3  w-auto ">
-        <li>
+        <li className="w-20">
           <Link
             to={"/"}
             className={`hover:border hover:bg-red-400 px-5 py-3 rounded-md hover:text-white bg-fixed  ${
@@ -41,7 +42,7 @@ function PageNav() {
           </Link>
         </li>
 
-        <li>
+        <li className="w-20">
           <Link
             to={"/shop"}
             className={`hover:border hover:bg-red-400 px-5 py-3 rounded-md hover:text-white  ${
@@ -52,7 +53,7 @@ function PageNav() {
           </Link>
         </li>
 
-        <li>
+        <li className="w-20">
           <Link
             to={"/about"}
             className={`hover:border hover:bg-red-400 px-5 py-3 rounded-md hover:text-white  ${
@@ -63,43 +64,7 @@ function PageNav() {
           </Link>
         </li>
 
-        {/* <li className="relative group">
-          <button
-            className="relative bottom-2 hover:bg-red-400 hover:text-white rounded-md px-5  w-30 h-11 group-hover:opacity-100"
-            onClick={() => {
-              setMouseOver(true);
-            }}
-            // onMouseLeave={() => {
-            //   setMouseOver(false);
-            // }}
-          >
-            <span className="text-center ">
-              {navigatePage.find((item) => item.path === selectedPath)?.label ||
-                "Page"}
-            </span>
-          </button>
-          {/* className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-400 rounded-md left-[-40px] mt-5 w-48 z-10" */}
-        {/* {mouseOver && (
-            <ul className="absolute transition-opacity duration-300 bg-slate-400 rounded-md left-[-40px] mt-5 w-48 z-10">
-              {navigatePage.map((item) => (
-                <li key={item.key} className="py-5 px-3">
-                  <Link
-                    to={item.path}
-                    className={`hover:border hover:border-transparent hover:bg-red-400 py-5 px-5 rounded-md hover:text-white ${
-                      click === item.path
-                        ? "bg-red-500 text-white"
-                        : "text-black"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )} */}
-        {/* </li> */}
-
-        <li>
+        <li className="w-20">
           <Link
             to={"/contact"}
             className={`hover:border hover:bg-red-400 px-5 py-3 rounded-md hover:text-white ${
@@ -110,15 +75,23 @@ function PageNav() {
           </Link>
         </li>
       </ul>
-      <div className="flex gap-10 align-middle">
+      <div className="flex w-30 gap-5 h-8 align-middle mr-20">
         <Link>
-          <img src="./search.svg" className="w-5" />
+          <MdSearch size={"w-full"} />
         </Link>
-        <Link>
-          <img src="./portrait.svg" className="w-5" />
+
+        <Link to={"account"}>
+          <MdAccountCircle
+            size={"w-full"}
+            className={`${click === "/account" && "text-red-500 font-bold"} `}
+          />
         </Link>
+
         <Link to={"cart"}>
-          <img src="./shopping-cart.svg" className="w-5" />
+          <MdShoppingCart
+            className={`${click === "/cart" && "text-red-500 font-bold"} `}
+            size={"w-1/2"}
+          />
         </Link>
       </div>
     </nav>

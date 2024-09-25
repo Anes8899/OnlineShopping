@@ -1,16 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../Footer";
 import { singleProductLoader } from "../../services/apiItem";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addProduct,
-  decrement,
-  getCurrentQuantityById,
-  increment,
-} from "./productSlice";
+import { addProduct, getCurrentQuantityById } from "./productSlice";
 import UpdateProduct from "./UpdateProduct";
+
+import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 
 export async function loader({ params }) {
   const product = await singleProductLoader(params.productId);
@@ -38,6 +35,7 @@ function ProductDetail() {
     };
     dispatch(addProduct(newItem));
   }
+  const totalPrice = price * quantity;
 
   function NextImage() {
     setCurrentImage((prevImage) => (prevImage + 1) % images.length);
@@ -53,10 +51,10 @@ function ProductDetail() {
   return (
     <>
       <div className="w-[850px] h-auto mx-auto">
-        <div className="w-[850px] h-[850px] border flex">
-          <img
-            src="../src/assets/icon/leftarrow.svg"
-            className="w-10 mx-auto rounded-3xl bg-slate-500 h-10 my-auto cursor-pointer overflow-hidden"
+        <div className="w-[450px] h-[450px] border flex mx-auto">
+          <MdOutlineNavigateBefore
+            size={"40px"}
+            className="mx-auto h-10 my-auto cursor-pointer overflow-hidden"
             onClick={PrevImage}
           />
           <div className="w-full h-full">
@@ -72,12 +70,16 @@ function ProductDetail() {
               />
             </AnimatePresence>
           </div>
-
-          <img
+          <MdOutlineNavigateNext
+            size={"40px"}
+            className="mx-auto h-10 my-auto cursor-pointer overflow-hidden"
+            onClick={NextImage}
+          />
+          {/* <img
             src="../src/assets/icon/right-arrow.svg"
             className="w-10 h-10 p-1 mx-auto rounded-3xl bg-slate-500 my-auto cursor-pointer"
             onClick={NextImage}
-          />
+          /> */}
         </div>
         <div className="w-[730px] mx-auto">
           <p className=" text-center mb-10 mt-10 font-bold text-[35px]">
@@ -94,13 +96,18 @@ function ProductDetail() {
                 Add to Card
               </button>
             ) : (
-              <div className="flex justify-around mt-10  w-[400px] flex-wrap align-middle mx-auto">
-                <div className="my-auto">Quantity</div>
-
-                <UpdateProduct productId={id} quantity={quantity} />
-
-                <div className="my-auto">{price}$</div>
-              </div>
+              <>
+                <div className="flex justify-around mt-10 w-[400px] flex-wrap align-middle mx-auto">
+                  <div className="my-auto">Quantity</div>
+                  <UpdateProduct productId={id} quantity={quantity} />
+                  <div className="my-auto">{totalPrice}$</div>
+                </div>
+                <Link to={"/shop"} className="flex w-12 mx-auto mt-10">
+                  <button className=" border px-5 py-2 rounded-md bg-blue-500 text-cyan-50">
+                    Done
+                  </button>
+                </Link>
+              </>
             )}
           </>
         </div>

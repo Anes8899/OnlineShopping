@@ -38,10 +38,13 @@ const useProductSlice = createSlice({
         (item) => item.productId !== action.payload.productId
       );
     },
+    clearCart: (state) => {
+      state.product = [];
+    },
   },
 });
 
-export const { increment, decrement, addProduct, deleteProduct } =
+export const { increment, decrement, addProduct, deleteProduct, clearCart } =
   useProductSlice.actions;
 
 export const getItem = (state) => state.product.product;

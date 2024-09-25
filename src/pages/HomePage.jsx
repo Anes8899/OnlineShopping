@@ -1,29 +1,37 @@
-// import { Link } from "react-router-dom";
-// import CardNewArrivals from "../components/cart/CardNewArrivals";
-// // import ProductCard from "../components/cart/ProductCard";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
-// import DetailAboutPage from "../components/DetailAboutPage";
-// import PageNav from "../components/PageNav";
 import { useState } from "react";
-// import ListProductCard from "../components/cart/ListProductCard";
+import { getProducts, limitProduct } from "../services/apiItem";
+import { Link, useLoaderData } from "react-router-dom";
+import CardNewArrivals from "../components/cart/CardNewArrivals";
+import ListProductCard from "../components/cart/ListProductCard";
+import ProductList from "../components/Products/ProductList";
+
+export async function loader() {
+  const productLimit = await getProducts();
+  return productLimit;
+}
 
 function HomePage() {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const productLimit = useLoaderData();
 
-  function handleScroll(e) {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    const position = Math.ceil(
-      (scrollTop / (scrollHeight - clientHeight)) * 100
-    );
-    setScrollPosition(position);
-  }
+  const itemLimet = productLimit.slice(0, 3);
+
+  console.log(productLimit);
+
+  // function handleScroll(e) {
+  //   const { scrollTop, scrollHeight, clientHeight } = e.target;
+  //   const position = Math.ceil(
+  //     (scrollTop / (scrollHeight - clientHeight)) * 100
+  //   );
+  //   setScrollPosition(position);
+  // }
 
   return (
-    <div onScroll={handleScroll} className="overflow-y-scroll h-screen">
-      {scrollPosition < 15 && scrollPosition > 0 ? null : (
+    <div>
+      {/* {scrollPosition < 15 && scrollPosition > 0 ? null : (
         <div className="fixed top-0 w-full z-50 bg-white "></div>
-      )}
+      )} */}
 
       <div>
         <section className="w-full  h-auto bg-gray-300">
@@ -37,16 +45,16 @@ function HomePage() {
                 laboris nisi ut aliquip ex ea commodo consequat is aute irure.
               </p>
 
-              {/* <Link to={"/shop"} className="relative "> */}
-              <Button
-                size="w-[150px]"
-                bg="bg-red-500"
-                effic="bg-gray-500"
-                className="py-5"
-              >
-                SHOP NOW
-              </Button>
-              {/* </Link> */}
+              <Link to={"/shop"}>
+                <Button
+                  size="w-[150px]"
+                  bg="bg-red-500"
+                  effic="bg-gray-500"
+                  className="py-5"
+                >
+                  SHOP NOW
+                </Button>
+              </Link>
             </div>
             <div className="p-6 overflow-hidden">
               <img
@@ -59,12 +67,12 @@ function HomePage() {
         <section className="xl:w-[1170px]  h-auto mx-auto mt-48 max-lg:mx-20 max-sm:mx-10 ">
           <p className="font-bold text-[40px] pb-16   ">New Arrivals</p>
           <div className="grid xl:grid-cols-3 md:grid-cols-2 md:w-full max-lg:grid-cols-2 max-sm:grid-cols-1">
-            {/* <CardNewArrivals />
-            <CardNewArrivals />
-            <CardNewArrivals /> */}
+            {itemLimet.map((product, id) => (
+              <CardNewArrivals key={id} item={product} />
+            ))}
           </div>
         </section>
-        <section className="grid xl:grid-cols-4 md:grid-cols-2 md:w-full max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2  max-sm:w-full">
+        {/* <section className="grid xl:grid-cols-4 md:grid-cols-2 md:w-full max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2  max-sm:w-full">
           <div className=" h-[630px] col-span-2 overflow-hidden max-sm:w-[445px]">
             <img
               src="../src/assets/img/menwithwatch.jpg"
@@ -90,8 +98,13 @@ function HomePage() {
                 className="h-[290px] w-full"
               />
             </div>
-          </div>
-        </section>
+          </div> */}
+        {/* {productLimit.map((product) => (
+            <div className="border mb-2">
+              <img src={`${product.image}`} className="w-full h-[315px]" />
+            </div>
+          ))} */}
+        {/* </section>   */}
         <section className="w-[1170px] mx-auto mt-40">
           <div className=" text-center mb-[70px] w-[652px] mx-auto">
             <p className="font-bold text-[50px]">Popular Items</p>
@@ -101,35 +114,47 @@ function HomePage() {
               gravida.
             </p>
           </div>
+
           <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-3">
-            {/* <ListProductCard /> */}
+            {productLimit
+              .map((products) => <ProductList products={products} />)
+              .slice(0, 6)}
           </div>
         </section>
+
         <div className="flex justify-center items-center group relative">
-          <Button className="py-5">VIEW MORE PRODUCT</Button>
+          <Link to={"/shop"}>
+            <Button className="py-5 mt-20">VIEW MORE PRODUCT</Button>
+          </Link>
         </div>
+
         <section>
-          <div className="flex justify-center mt-[200px]">
-            <div className=" w-[1170px] h-[719px] justify-between flex gap-10">
-              <div className="w-[457px] h-[336px] my-auto mx-[35px]">
-                <p className=" text-[50px] font-bold pb-9">Watch of Choice</p>
-                <p className="text-[15px] pb-16">
-                  Enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse.
-                </p>
-                <Button size="w-[200px]" className="py-5">
-                  SHOP WATCH
-                </Button>
+          {productLimit
+            .map((product, index) => (
+              <div className="flex justify-center mt-[200px]">
+                <div
+                  key={index}
+                  className={`w-[1170px] h-[719px] justify-between flex gap-10 ${
+                    index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                  }`}
+                >
+                  <div className="w-[457px] h-[336px] my-auto mx-[35px]">
+                    <p className=" text-[50px] font-bold pb-9">
+                      {product.title}
+                    </p>
+                    <p className="text-[15px] pb-16">{product.description}</p>
+                    <Button size="w-[200px]" className="py-5">
+                      SHOP WATCH
+                    </Button>
+                  </div>
+                  <img src={product.image} className="w-[585px] h-[589px]" />
+                </div>
               </div>
-              <img
-                src="../src/assets/img/popular1.png.webp"
-                className="w-[585px] h-[589px]"
-              />
-            </div>
-          </div>
+            ))
+            .slice(0, 2)}
         </section>
-        <section className="flex justify-center mt-[200px]">
+
+        {/* <section className="flex justify-center mt-[200px]">
           <div className=" w-[1170px] h-[719px] justify-between flex gap-10">
             <img
               src="../src/assets/img/popular1.png.webp"
@@ -147,7 +172,7 @@ function HomePage() {
               </Button>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* <DetailAboutPage /> */}
         <Footer />
       </div>

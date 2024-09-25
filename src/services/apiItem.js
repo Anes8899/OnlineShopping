@@ -23,3 +23,11 @@ export async function singleProductLoader(productId) {
   }
   return response.json();
 }
+
+export async function limitProduct() {
+  const res = await fetch("https://fakestoreapi.com/products?limit=2");
+  if (!res.ok) {
+    throw new Error("Error");
+  }
+  return res.json();
+}

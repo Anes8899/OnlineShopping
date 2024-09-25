@@ -23,18 +23,7 @@ function ProductList({ products }) {
         src={`${image}`}
         className="w-[250px] h-[280px] mx-auto my-auto relative top-8"
       />
-      {/* <p className="text-center relative top-[50px] h-14 duration-500 ease-in-out group-hover:translate-y-[-10%] cursor-pointer group-hover:bg-red-500 pt-3">
-        {hover ? (
-          <button
-            className="text-[15px] text-white"
-            onClick={() => alert("click")}
-          >
-            Add to Card
-          </button>
-        ) : null}
-      </p> */}
-      {/* <div className={"border border-red-500 relative bottom-[-44px]"}></div> */}
-      {/* </div> */}
+
       <div className="text-center my-10">
         <TruncatedText
           text={title}
@@ -45,7 +34,7 @@ function ProductList({ products }) {
       </div>
       <Link to={`${products.id}`} className="border flex flex-col">
         <Button size="20" className="py-3">
-          Preview{" "}
+          Preview
         </Button>
       </Link>
     </div>
