@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer className="max-w-[1256px] h-[516px] w-full mx-auto">
-      <div className=" w-[1170px] h-[300px] mx-auto  mt-[150px] justify-between flex px-10">
+    <footer className="w-[50%] h-[516px]  mx-auto">
+      <div className="h-[300px] mx-auto  mt-[150px] justify-between flex px-10 flex-wrap">
         <div className="w-[25%]">
           <p className="text-[20px] font-bold">Time Zone</p>
           <p className="mt-5">
@@ -31,7 +31,7 @@ function Footer() {
           </p>
         </div>
       </div>
-      <div className="flex justify-between  mx-auto w-[1170px]">
+      <div className="flex justify-between  mx-auto ">
         <div>
           <p className="text-lg text-zinc-500">
             Copyright ©2024 All rights reserved | This template is made with ❣️

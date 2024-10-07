@@ -21,16 +21,16 @@ function PageNav() {
     setClick(location.pathname);
     setSelectedPath(location.pathname);
   }, [location]);
-
+  // className="fixed border w-full h-28 justify-between flex p-7 bg-white top-0 left-0 z-50 border-b border-gray-300"
   return (
-    <nav className="fixed border w-[1530px] xl:w-full h-28 justify-between flex p-7 bg-white top-0 left-0 z-50 border-b border-gray-300">
-      <div className="text-[30px] font-sans font-bold">
+    <nav className="min-w-full flex flex-wrap justify-around align-middle h-[5em] bg-white border fixed z-50">
+      <div className="text-[30px] font-sans font-bold my-auto">
         <Link to={"/"}>
-          <span className="text-red-500">Time</span> Zone
+          <span className="text-red-500">Store</span> Shop❣️
         </Link>
       </div>
 
-      <ul className="flex gap-2 text-center mt-3  w-auto ">
+      <ul className="flex gap-2 text-center mt-3 w-auto items-center ">
         <li className="w-20">
           <Link
             to={"/"}
@@ -75,22 +75,22 @@ function PageNav() {
           </Link>
         </li>
       </ul>
-      <div className="flex w-30 gap-5 h-8 align-middle mr-20">
+      <div className="flex gap-5 items-center">
         <Link>
-          <MdSearch size={"w-full"} />
+          <MdSearch size={25} />
         </Link>
 
         <Link to={"account"}>
           <MdAccountCircle
-            size={"w-full"}
+            size={25}
             className={`${click === "/account" && "text-red-500 font-bold"} `}
           />
         </Link>
 
         <Link to={"cart"}>
           <MdShoppingCart
+            size={25}
             className={`${click === "/cart" && "text-red-500 font-bold"} `}
-            size={"w-1/2"}
           />
         </Link>
       </div>

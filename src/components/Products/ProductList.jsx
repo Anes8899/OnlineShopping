@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 
-const TruncatedText = ({ text, maxLength, className }) => {
-  const truncated =
-    text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+import TextControl from "../TextControl";
 
-  return <p className={className}>{truncated}</p>;
-};
+// const TruncatedText = ({ text, maxLength, className }) => {
+//   const truncated =
+//     text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
+//   return <p className={className}>{truncated}</p>;
+// };
 
 function ProductList({ products }) {
   const { id, title, image, price } = products;
@@ -21,13 +23,13 @@ function ProductList({ products }) {
       > */}
       <img
         src={`${image}`}
-        className="w-[250px] h-[280px] mx-auto my-auto relative top-8"
+        className="w-[150px] h-[180px] mx-auto my-auto relative top-8"
       />
 
       <div className="text-center my-10">
-        <TruncatedText
+        <TextControl
           text={title}
-          maxLength={20}
+          maxLength={10}
           className={"text-[20px] font-bold"}
         />
         <p className="font-bold mt-3 text-red-600">${price}</p>

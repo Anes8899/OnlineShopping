@@ -50,14 +50,14 @@ function ProductDetail() {
 
   return (
     <>
-      <div className="w-[850px] h-auto mx-auto">
-        <div className="w-[450px] h-[450px] border flex mx-auto">
+      <div className="w-[850px] h-auto mx-auto pt-5">
+        <div className="w-[450px] h-[450px] border flex mx-auto p-16">
           <MdOutlineNavigateBefore
             size={"40px"}
             className="mx-auto h-10 my-auto cursor-pointer overflow-hidden"
             onClick={PrevImage}
           />
-          <div className="w-full h-full">
+          <div className="w-full h-full pt-5">
             <AnimatePresence wait>
               <motion.img
                 key={images[currentImage]}

@@ -15,9 +15,8 @@ function AppLayout() {
 
   return (
     <div>
-      <div>
-        <PageNav />
-      </div>
+      <PageNav />
+
       <div id="detail">
         <Outlet />
       </div>

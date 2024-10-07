@@ -14,7 +14,7 @@ function Shop() {
 
   return (
     <div>
-      <div className="  w-[1170px] mx-auto mt-40">
+      <div className="  w-[1170px] mx-auto">
         <div className="flex gap-10 justify-between ">
           <ul className="flex gap-10 cursor-pointer">
             <li className="hover:underline decoration-2 decoration-indigo-500 underline-offset-8 ">
