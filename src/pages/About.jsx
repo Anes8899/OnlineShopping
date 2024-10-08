@@ -1,7 +1,7 @@
 function About() {
   return (
     <>
-      <div className="w-[1170px]  mx-auto ">
+      <div className="w-[1170px]  mx-auto mt-32">
         <div className="w-[750px] mx-auto mb-10 ">
           <p className="text-[30px] font-bold mb-5 flex ">
             <hr className="w-8 h-1 bg-red-500 border-10 rounded my-auto mr-5" />

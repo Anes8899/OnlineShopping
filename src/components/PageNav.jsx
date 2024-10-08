@@ -23,7 +23,7 @@ function PageNav() {
   }, [location]);
   // className="fixed border w-full h-28 justify-between flex p-7 bg-white top-0 left-0 z-50 border-b border-gray-300"
   return (
-    <nav className="min-w-full flex flex-wrap justify-around align-middle h-[5em] bg-white border fixed z-50">
+    <nav className="min-w-full flex flex-wrap justify-around align-middle h-[5em] bg-white border fixed z-50 top-0 ">
       <div className="text-[30px] font-sans font-bold my-auto">
         <Link to={"/"}>
           <span className="text-red-500">Store</span> Shop❣️
